@@ -22,37 +22,44 @@ for _ in range (int(N)):
 
 cnt = 0
 
-def DFS(view,i,j,visited,count):
+def DFS(view,i,j,visited):
+    global cnt
     visited[i][j] = 1
     if view[i][j] != 0 and j>=0 and i >=0:
-        print(i,j)
+        cnt += 1
         view[i][j] = 5
         #상하좌우
-        if i-1 <= 0:
+        if i-1 >= 0:
             if visited[i-1][j] == 0:
-                DFS(view,i-1,j,visited,count)
+                DFS(view,i-1,j,visited)
         if i+1 < int(N): # 맵을 벗어나지 않는 경우
             if visited[i+1][j] == 0: # 방문하지 않았을 경우
-                DFS(view,i+1,j,visited,count) # DFS(하)
+                DFS(view,i+1,j,visited) # DFS(하)
         if j+1 < int(N):
             if visited[i][j+1] == 0:
-                DFS(view,i,j+1,visited,count)
-        if j-1 <= 0:
+                DFS(view,i,j+1,visited)
+        if j-1 >= 0:
             if visited[i][j-1] == 0:
-                DFS(view,i,j-1,visited,count)
+                DFS(view,i,j-1,visited)
 
+answer = []
 
 for i in range(int(N)):
     for j in range(int(N)):
         if visited[i][j] == 0:
             visited[i][j] = 1 # visited 0이면 1로 만들면서 탐색
             if view[i][j] == 1:
-                cnt+=1
-                DFS(view,i,j,visited,1)
-                print("--")
+                DFS(view,i,j,visited)
+                # print(cnt)
+                answer.append(cnt)
+                cnt = 0
+                # print("--")
         # view를 탐색한다. visited가 0이면 탐색
         # view를 탐색하면서 0이 아니면 DFS 실행
         # DFS 끝나고나서
-pprint(view)
-print('----')
-pprint(visited)
+# pprint(view)
+# print('----')
+# pprint(visited)
+print(len(answer))
+for x in sorted(answer):
+    print(x)
