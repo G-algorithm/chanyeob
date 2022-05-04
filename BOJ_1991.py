@@ -51,7 +51,7 @@ tree = {}
 
 for _ in range (N):
     m,l,r = input().split()
-    tree[m] = Node(m,l,r)
+    tree[m] = Node(m,l,r) # dict 안에 [0]:left, [1]:right
 
 preorder(tree['A'])
 print()
